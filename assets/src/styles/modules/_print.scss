@@ -1,0 +1,30 @@
+/* hide the page footer on screen display */
+.page-break { display: none; }
+
+@media print {
+  /* make a 10-inch high block that sits on top of the page content */
+  .page-break {
+    page-break-before: always;
+    display: block;
+    position: absolute;
+    height: 720pt;
+  }
+
+  /* stick the contents of .page-break to the bottom of the 10 inch block */
+  .page-break .copyright {
+    position: absolute;
+    bottom: 0px;
+  }
+
+
+  @include make-grid(md);
+  .printer-hidden{display:none;}
+  .short-hr-top{display:none;}
+  .list-group-item{border: none;}
+  .printer-col-md-12{width: 100% !important;}
+
+  .container {
+    margin: 0px;
+    padding: 0px;
+  }
+}

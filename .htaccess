@@ -1,0 +1,25 @@
+SetEnv CI_ENV development
+
+RewriteEngine on
+Options +FollowSymLinks
+
+#remove index from url
+RewriteCond $1 !^(index\.php|uploads|temp_pix|assets|qrgen|robots\.txt)
+
+RewriteCond %{HTTP_HOST} ^((?!www\.)(?!opguy\.com)[^\.]+)\.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?$1 [L]
+
+#Removes trailing slashes (prevents SEO duplicate content issues
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.+)/$ $1 [L,R=301]
+
+#Prevent viewing of .htaccess file
+<Files .htaccess>
+    order allow,deny
+    deny from all
+</Files>
+
+#Prevent directory listings
+Options All -Indexes
